@@ -26,7 +26,7 @@
   
 (defun pwr1 (n pow &optional (result 1))
   (if (> pow 0)
-      (pwr n (decf pow) (* result n))
+      (pwr1 n (1- pow) (* result n))
        result))
 
 (defun pwr2 (n pow)
@@ -36,11 +36,11 @@
   (reduce #'* (make-array pow :initial-element n)))
 
 (defun pwr4 (n pow)
-  (last (loop
+  (loop
      with result = 1
      for p below pow
      do (setf result (* result n))
-     collect result)))
+     finally (return result)))
 
 
  
